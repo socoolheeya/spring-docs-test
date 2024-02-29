@@ -59,6 +59,8 @@ tasks.asciidoctor {
 }
 
 tasks.register("copyDocument", Copy::class) {
+    description = "spring restdocs test description"
+    group=JavaBasePlugin.DOCUMENTATION_GROUP
     dependsOn(tasks.asciidoctor)
     from(file("build/docs/asciidoc"))
     into(file("src/main/resources/static/docs"))

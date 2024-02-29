@@ -1,9 +1,9 @@
 server:
   port: 8123
-  servlet:
-    encoding:
-      charset: UTF-8
-      force: true
+#  servlet:
+#    encoding:
+#      charset: UTF-8
+#      force: true
 spring:
   profiles:
     active: local

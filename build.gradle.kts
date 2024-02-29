@@ -1,7 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.gradle.utils.loadPropertyFromResources
-import org.springframework.boot.gradle.tasks.bundling.BootJar
-import javax.swing.Spring
 
 plugins {
     id("org.springframework.boot") version "3.2.3"
@@ -30,6 +27,7 @@ extra["snippetsDir"] = file("build/generated-snippets")
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -52,6 +50,9 @@ tasks.test {
 }
 
 tasks.asciidoctor {
+    doFirst {
+        delete(file("src/main/resources/static/docs"))
+    }
     inputs.dir(project.extra["snippetsDir"]!!)
     configurations("asciidoctorExt")
     dependsOn(tasks.test)
@@ -59,9 +60,6 @@ tasks.asciidoctor {
 
 tasks.register("copyDocument", Copy::class) {
     dependsOn(tasks.asciidoctor)
-    doFirst {
-        delete(file("src/main/resources/static/docs"))
-    }
     from(file("build/docs/asciidoc"))
     into(file("src/main/resources/static/docs"))
 }

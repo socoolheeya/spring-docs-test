@@ -1,0 +1,93 @@
+= SpringDocs RESTful API
+Wonhee.lee;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+
+[[overview]]
+= Overview
+
+[[overview_http_verbs]]
+== HTTP verbs
+
+RESTful notes tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PATCH`
+| Used to update an existing resource, including partial updates
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+[[overview_http_status_codes]]
+== HTTP status codes
+
+RESTful notes tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's
+`Location` header
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `404 Not Found`
+| The requested resource did not exist
+|===
+
+
+[[members-api]]
+== Member
+=== Load (멤버 조회)
+[[Http-Request]]
+operation::members/load[snippets='path-parameters,response-fields']
+
+==== Example Request
+include::{snippets}/members/load/http-request.adoc[]
+
+[[Http-Response]]
+==== Example Response
+include::{snippets}/members/load/http-response.adoc[]
+
+=== Register (멤버 등록)
+operation::members/register[snippets='request-fields,response-fields']
+==== Example Request
+include::{snippets}/members/register/http-request.adoc[]
+==== Example Response
+include::{snippets}/members/register/http-response.adoc[]
+
+=== Modify (멤버 수정)
+operation::members/modify[snippets='path-parameters,request-fields,response-fields']
+==== Example Request
+include::{snippets}/members/register/http-request.adoc[]
+==== Example Response
+include::{snippets}/members/register/http-response.adoc[]
+=== Remove (멤버 삭제)
+operation::members/remove[snippets='path-parameters']
+==== Example Response
+include::{snippets}/members/remove/http-response.adoc[]

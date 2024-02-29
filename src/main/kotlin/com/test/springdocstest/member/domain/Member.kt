@@ -39,6 +39,11 @@ class Member(
         this.isDelete = memberDto.isDelete
     }
 
+    @Transactional
+    fun updatePassword(password: String) {
+        this.password = password
+    }
+
     fun toDomain(): MemberDto {
         return MemberDto(
             memberId = memberId,

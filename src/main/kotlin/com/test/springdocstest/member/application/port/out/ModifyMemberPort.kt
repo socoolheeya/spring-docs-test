@@ -5,4 +5,6 @@ import com.test.springdocstest.member.adapter.out.external.MemberResponse
 
 interface ModifyMemberPort {
     fun modifyMember(request: MemberRequest.Companion.Modify): MemberResponse.Companion.Modify
+
+    fun modifyPassword(request: MemberRequest.Companion.ModifyPassword)
 }

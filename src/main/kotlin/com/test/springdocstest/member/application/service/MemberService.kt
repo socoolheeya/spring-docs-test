@@ -1,6 +1,5 @@
 package com.test.springdocstest.member.application.service
 
-import com.test.springdocstest.member.adapter.out.external.MemberDto
 import com.test.springdocstest.member.adapter.out.external.MemberRequest
 import com.test.springdocstest.member.adapter.out.external.MemberResponse
 import com.test.springdocstest.member.application.port.`in`.LoadMemberUseCase
@@ -11,9 +10,12 @@ import com.test.springdocstest.member.application.port.out.LoadMemberPort
 import com.test.springdocstest.member.application.port.out.ModifyMemberPort
 import com.test.springdocstest.member.application.port.out.RegisterMemberPort
 import com.test.springdocstest.member.application.port.out.RemoveMemberPort
+import jakarta.validation.Valid
 import org.springframework.stereotype.Service
+import org.springframework.validation.annotation.Validated
 
 @Service
+@Validated
 class MemberService(
     private val loadMemberPort: LoadMemberPort,
     private val registerMemberPort: RegisterMemberPort,
@@ -25,13 +27,16 @@ class MemberService(
         return loadMemberPort.loadMember(memberId)
     }
 
-    override fun register(request: MemberRequest.Companion.Register): MemberResponse.Companion.Register {
+    override fun register(@Valid request: MemberRequest.Companion.Register): MemberResponse.Companion.Register {
         return registerMemberPort.registerMember(request)
     }
 
     override fun modify(memberId: Long, request: MemberRequest.Companion.Modify): MemberResponse.Companion.Modify {
-
         return modifyMemberPort.modifyMember(request)
+    }
+
+    override fun modifyPassword(request: MemberRequest.Companion.ModifyPassword) {
+        modifyMemberPort.modifyPassword(request)
     }
 
     override fun remove(memberId: Long) {

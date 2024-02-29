@@ -47,6 +47,14 @@ class MemberPersistenceAdapter (
     }
 
     @Transactional
+    override fun modifyPassword(request: MemberRequest.Companion.ModifyPassword) {
+        val member = memberRepository.findById(request.getMemberId())
+            .orElseThrow { throw IllegalArgumentException("can not found member") }
+        member.updatePassword(request.getPassword())
+
+    }
+
+    @Transactional
     override fun removeMember(memberId: Long) {
         memberRepository.deleteById(memberId)
     }

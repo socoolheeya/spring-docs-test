@@ -53,6 +53,15 @@ open class MemberRequest {
             fun isDelete(): Boolean = isDelete
         }
 
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        data class ModifyPassword(
+            private var memberId: Long,
+            private val password: String
+        ) {
+            fun getMemberId(): Long = memberId
+            fun getPassword(): String = password
+        }
+
         data class Remove(
             val memberId: Long
         )

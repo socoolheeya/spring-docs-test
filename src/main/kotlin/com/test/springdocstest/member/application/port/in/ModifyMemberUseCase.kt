@@ -5,4 +5,5 @@ import com.test.springdocstest.member.adapter.out.external.MemberResponse
 
 interface ModifyMemberUseCase {
     fun modify(memberId: Long, request: MemberRequest.Companion.Modify): MemberResponse.Companion.Modify
+    fun modifyPassword(request: MemberRequest.Companion.ModifyPassword)
 }

@@ -65,29 +65,29 @@ use of HTTP status codes.
 == Member
 === Load (멤버 조회)
 [[Http-Request]]
-operation::members/load[snippets='path-parameters,response-fields']
+operation::member-controller-test/load[snippets='path-parameters,response-fields']
 
 ==== Example Request
-include::{snippets}/members/load/http-request.adoc[]
+include::{snippets}/member-controller-test/load/http-request.adoc[]
 
 [[Http-Response]]
 ==== Example Response
-include::{snippets}/members/load/http-response.adoc[]
+include::{snippets}/member-controller-test/load/http-response.adoc[]
 
 === Register (멤버 등록)
-operation::members/register[snippets='request-fields,response-fields']
+operation::member-controller-test/register[snippets='request-fields,response-fields']
 ==== Example Request
-include::{snippets}/members/register/http-request.adoc[]
+include::{snippets}/member-controller-test/register/http-request.adoc[]
 ==== Example Response
-include::{snippets}/members/register/http-response.adoc[]
+include::{snippets}/member-controller-test/register/http-response.adoc[]
 
 === Modify (멤버 수정)
-operation::members/modify[snippets='path-parameters,request-fields,response-fields']
+operation::member-controller-test/modify[snippets='path-parameters,request-fields,response-fields']
 ==== Example Request
-include::{snippets}/members/register/http-request.adoc[]
+include::{snippets}/member-controller-test/register/http-request.adoc[]
 ==== Example Response
-include::{snippets}/members/register/http-response.adoc[]
+include::{snippets}/member-controller-test/register/http-response.adoc[]
 === Remove (멤버 삭제)
-operation::members/remove[snippets='path-parameters']
+operation::member-controller-test/remove[snippets='path-parameters']
 ==== Example Response
-include::{snippets}/members/remove/http-response.adoc[]
+include::{snippets}/member-controller-test/remove/http-response.adoc[]

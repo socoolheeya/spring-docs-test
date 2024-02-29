@@ -74,19 +74,8 @@ class MemberControllerTest(
     }
 
     @Test
-    fun makeRestDocs() {
-        this.mockMvc.perform(
-            MockMvcRequestBuilders.get("/sample/api/url")
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk)
-            .andDo(print())
-            .andDo(document("sample-docs"))
-    }
-
-    @Test
     @DisplayName("멤버 조회")
-    fun loadMember() {
+    fun load() {
         val response = MemberResponse.Companion.Search(
             memberId = 1L,
             name = "hong",
@@ -101,16 +90,14 @@ class MemberControllerTest(
             .contentType(MediaType.APPLICATION_JSON)
         ).andDo(
             print()
-        ).andDo(document("members/load",
-                preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint()),
+        ).andDo(restDocs.document(
                 pathParameters(
                     parameterWithName("memberId").description("멤버 ID")
                 ),
                 responseFields(
                     fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("멤버 ID"),
                     fieldWithPath("name").type(JsonFieldType.STRING).description("이름"),
-                    fieldWithPath("email").type(JsonFieldType.STRING).description("이메일").optional(),
+                    fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
                     fieldWithPath("isDelete").type(JsonFieldType.BOOLEAN).description("삭제여부")
                 )
             ))
@@ -121,7 +108,7 @@ class MemberControllerTest(
 
     @Test
     @DisplayName("멤버 등록")
-    fun registerMember() {
+    fun register() {
 
         val response = MemberResponse.Companion.Register(
             memberId = 1L,
@@ -148,9 +135,7 @@ class MemberControllerTest(
             .contentType(MediaType.APPLICATION_JSON)
         ).andDo(
             print()
-        ).andDo(document("members/register",
-            preprocessRequest(prettyPrint()),
-            preprocessResponse(prettyPrint()),
+        ).andDo(restDocs.document(
             requestFields(
                 fieldWithPath("name").type(JsonFieldType.STRING).description("이름"),
                 fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
@@ -171,7 +156,7 @@ class MemberControllerTest(
 
     @Test
     @DisplayName("멤버 수정")
-    fun modifyMember() {
+    fun modify() {
         val response = MemberResponse.Companion.Modify(
             memberId = 1,
             name = "tester",
@@ -196,9 +181,7 @@ class MemberControllerTest(
             .contentType(MediaType.APPLICATION_JSON)
         ).andDo(
             print()
-        ).andDo(document("members/modify",
-            preprocessRequest(prettyPrint()),
-            preprocessResponse(prettyPrint()),
+        ).andDo(restDocs.document(
             pathParameters(
                 parameterWithName("memberId").description("멤버 ID")
             ),
@@ -222,7 +205,7 @@ class MemberControllerTest(
 
     @Test
     @DisplayName("멤버 삭제")
-    fun removeMember() {
+    fun remove() {
         BDDMockito.doNothing()
             .`when`(memberService)
             .remove(anyLong())
@@ -233,9 +216,7 @@ class MemberControllerTest(
             .contentType(MediaType.APPLICATION_JSON)
         ).andDo(
             print()
-        ).andDo(document("members/remove",
-            preprocessRequest(prettyPrint()),
-            preprocessResponse(prettyPrint()),
+        ).andDo(restDocs.document(
             pathParameters(
                 parameterWithName("memberId").description("멤버 ID")
             ),

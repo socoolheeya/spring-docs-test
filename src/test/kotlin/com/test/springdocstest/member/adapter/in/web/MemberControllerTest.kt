@@ -168,7 +168,6 @@ class MemberControllerTest(
             memberId = 1,
             name = "tester",
             email = "tester@gmail.com",
-            password = "1234",
             isDelete = false
         )
 

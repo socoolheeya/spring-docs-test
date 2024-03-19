@@ -8,6 +8,9 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.Min
+import jakarta.validation.constraints.NotNull
 import org.hibernate.annotations.SQLDelete
 import org.springframework.transaction.annotation.Transactional
 
@@ -21,16 +24,20 @@ class Member(
     var memberId: Long?,
     @Column
     var name: String,
-    @Column
+    @Column @Email
     var email: String?,
-    @Column
-    var password: String,
+    @Column @Min(8)
+    var password: String?,
     @Column
     var isDelete: Boolean = false
 ) {
-    constructor(): this(
+    constructor() : this(
         0L, "", null, "", false
     )
+
+    companion object {
+        const val DEFAULT_EMAIL = "default@gmail.com"
+    }
 
     @Transactional
     fun update(memberDto: MemberDto) {
@@ -55,28 +62,28 @@ class Member(
 
     fun toResponseSearchDomain(): MemberResponse.Companion.Search {
         return MemberResponse.Companion.Search(
-            memberId = memberId?: 0L,
+            memberId = memberId ?: 0L,
             name = name,
-            email = email?: "default@gmail.com",
+            email = email ?: DEFAULT_EMAIL,
             isDelete = isDelete
         )
     }
 
     fun toResponseRegisterDomain(): MemberResponse.Companion.Register {
         return MemberResponse.Companion.Register(
-            memberId = memberId?: 0L,
+            memberId = memberId ?: 0L,
             name = name,
-            email = email?: "default@gmail.com",
-            password = password,
+            email = email ?: DEFAULT_EMAIL,
+            password = password ?: "1234",
             isDelete = isDelete
         )
     }
 
     fun toResponseModifyDomain(): MemberResponse.Companion.Modify {
         return MemberResponse.Companion.Modify(
-            memberId = memberId?: 0L,
+            memberId = memberId ?: 0L,
             name = name,
-            email = email?: "default@gmail.com",
+            email = email ?: DEFAULT_EMAIL,
             isDelete = isDelete
         )
     }

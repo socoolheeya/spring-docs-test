@@ -1,4 +1,4 @@
-package com.test.springdocstest.member.application.configuration
+package com.test.springdocstest.configuration
 
 import com.zaxxer.hikari.HikariDataSource
 import jakarta.persistence.EntityManagerFactory

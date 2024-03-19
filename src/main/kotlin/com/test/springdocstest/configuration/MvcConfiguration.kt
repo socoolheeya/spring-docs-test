@@ -1,4 +1,4 @@
-package com.test.springdocstest.member.application.configuration
+package com.test.springdocstest.configuration
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.converter.HttpMessageConverter

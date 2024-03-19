@@ -2,6 +2,7 @@ package com.test.springdocstest.member.adapter.out.external
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.test.springdocstest.member.domain.Member
+import jakarta.validation.constraints.NotNull
 
 open class MemberRequest {
     companion object {
@@ -30,10 +31,12 @@ open class MemberRequest {
 
         @JsonInclude(JsonInclude.Include.NON_NULL)
         data class Modify(
+            @NotNull
             private var memberId: Long,
+            @NotNull
             private val name: String,
             private val email: String?,
-            private val password: String,
+            @NotNull
             private val isDelete: Boolean
         ) {
             fun toEntity(): Member {
@@ -41,7 +44,7 @@ open class MemberRequest {
                     memberId = memberId,
                     name = name,
                     email = email,
-                    password = password,
+                    password = "",
                     isDelete = isDelete
                 )
             }
@@ -49,7 +52,6 @@ open class MemberRequest {
             fun getMemberId(): Long = memberId
             fun getName(): String = name
             fun getEmail(): String? = email
-            fun getPassword(): String = password
             fun isDelete(): Boolean = isDelete
         }
 
